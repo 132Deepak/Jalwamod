@@ -8,44 +8,22 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
         :root { --gold: #FFD700; --green: #2ecc71; --red: #ff4757; --violet: #9b59b6; --black: #111; }
-        body { background: #f4f4f4; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; padding-bottom: 80px; }
-        
-        /* Tab System */
+        body { background: #f4f4f4; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 80px; }
         .tab-content { display: none; width: 100%; min-height: 100vh; }
         .active-tab { display: block; }
-
-        /* Header */
         .header { background: #000; color: var(--gold); padding: 20px; text-align: center; font-size: 22px; font-weight: 900; border-bottom: 4px solid var(--gold); position: sticky; top: 0; z-index: 100; }
-
-        /* Dashboard View */
         .card { background: #fff; margin: 20px; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .server-id { font-size: 55px; font-weight: 900; color: #222; margin: 10px 0; letter-spacing: 2px; }
-        .mod-btn { background: #fff; border: 2px dashed #bbb; border-radius: 15px; margin: 20px; padding: 30px; cursor: pointer; transition: 0.3s; text-align: center; }
-
-        /* Recharge View - High Value Plans */
-        .plan { background: #fff; border-radius: 15px; padding: 20px; margin: 15px; border-left: 6px solid #000; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .plan h3 { margin: 0; color: #333; font-size: 18px; }
-        .price { color: var(--red); font-size: 28px; font-weight: 900; margin: 5px 0; }
-        .benefits { font-size: 12px; color: #555; margin: 10px 0; padding-left: 15px; }
-        .benefits li { margin-bottom: 5px; }
-        .buy-now { width: 100%; background: #000; color: var(--gold); border: none; padding: 14px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; }
-
-        /* Calculator Style */
-        .calc-box { background: #000; color: #fff; margin: 15px; padding: 20px; border-radius: 15px; text-align: center; }
-        .calc-input { width: 80%; padding: 10px; border-radius: 5px; border: none; text-align: center; font-weight: bold; font-size: 18px; margin: 10px 0; }
-
-        /* Hack View */
+        .mod-btn { background: #fff; border: 2px dashed #bbb; border-radius: 15px; margin: 20px; padding: 30px; cursor: pointer; text-align: center; }
         #hack { background: #000; color: #fff; text-align: center; }
-        .period-box { color: var(--gold); font-size: 14px; margin-top: 20px; padding-top: 20px; }
-        .timer-circle { width: 130px; height: 130px; border: 5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 30px auto; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+        .period-box { color: var(--gold); font-size: 14px; margin-top: 20px; }
+        .timer-circle { width: 130px; height: 130px; border: 5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 30px auto; }
         .signal-grid { display: flex; justify-content: center; gap: 20px; margin-top: 40px; }
         .ball { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #333; opacity: 0.1; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.5s; }
         .active-g { opacity: 1; background: var(--green); box-shadow: 0 0 40px var(--green); transform: scale(1.1); }
         .active-r { opacity: 1; background: var(--red); box-shadow: 0 0 40px var(--red); transform: scale(1.1); }
         .active-v { opacity: 1; background: var(--violet); box-shadow: 0 0 40px var(--violet); transform: scale(1.1); }
-
-        /* Footer */
-        .footer { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 15px 0; border-top: 2px solid var(--gold); z-index: 1000; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 15px 0; border-top: 2px solid var(--gold); }
         .nav-item { color: #666; font-weight: bold; font-size: 12px; cursor: pointer; }
         .nav-active { color: var(--gold); }
     </style>
@@ -65,125 +43,68 @@
         <b style="font-size:20px;">COLOUR PREDICTION MOD</b><br>
         <small id="hint-text" style="color:var(--red);">CLICK TO ACTIVATE VIP</small>
     </div>
-    <center style="color:#bbb; font-size:11px; margin-top:50px;">Device ID: JALWA-7226</center>
-</div>
-
-<div id="recharge" class="tab-content">
-    
-    <div class="calc-box">
-        <div style="color:var(--gold); font-weight:bold; font-size:14px;">PROFIT CALCULATOR</div>
-        <input type="number" id="invest" class="calc-input" placeholder="Enter Amount" oninput="calc()">
-        <div style="font-size:12px;">Estimated Daily Profit: <b id="profit-val" style="color:var(--green);">₹0</b></div>
-    </div>
-
-    <div class="plan" style="border-left-color: #3498db;">
-        <h3>PRO VIP - 1 MONTH</h3>
-        <div class="price">₹1,999</div>
-        <ul class="benefits">
-            <li>95% Accuracy Guaranteed</li>
-            <li>Master Admin Priority Signal</li>
-            <li>Personal 1-on-1 Support</li>
-        </ul>
-        <button class="buy-now" onclick="payNow('Pro VIP 1 Month', 1999)">ACTIVATE PRO</button>
-    </div>
-
-    <div class="plan" style="border-left-color: var(--violet); border: 2px solid var(--violet);">
-        <span style="position:absolute; right:10px; top:10px; background:var(--violet); color:#fff; font-size:10px; padding:3px 8px; border-radius:5px;">BEST SELLER</span>
-        <h3>MASTER PASS - 3 MONTHS</h3>
-        <div class="price">₹4,999</div>
-        <ul class="benefits">
-            <li><b>99% Jackpot Accuracy</b></li>
-            <li>Number Prediction Also Included</li>
-            <li>Direct Server API Connection</li>
-        </ul>
-        <button class="buy-now" style="background:var(--violet);" onclick="payNow('Master Pass 3 Month', 4999)">ACTIVATE MASTER</button>
-    </div>
-
-    <div class="plan" style="border: 2px solid var(--gold); background: #fffdf0;">
-        <center><b style="color:#b8860b;">👑 ROYAL LIFETIME ACCESS</b></center>
-        <div class="price" style="text-align:center;">₹9,999</div>
-        <ul class="benefits">
-            <li>Life-Time Validity (No Renewal)</li>
-            <li>Instant Signal (0.0s Delay)</li>
-            <li>Loss Recovery Special Algorithm</li>
-            <li>Direct Admin VIP Group Access</li>
-        </ul>
-        <button class="buy-now" style="background:linear-gradient(to right, #000, #444);" onclick="payNow('Lifetime Royal', 9999)">GET ROYAL ACCESS</button>
-    </div>
 </div>
 
 <div id="hack" class="tab-content">
     <div class="period-box">PERIOD: <span id="period-num">20240501101</span></div>
     <div class="timer-circle" id="timer">00:30</div>
-    
     <div class="signal-grid">
         <div id="ball-g" class="ball">GREEN</div>
         <div id="ball-v" class="ball">VIOLET</div>
         <div id="ball-r" class="ball">RED</div>
     </div>
-    
-    <div style="margin-top:50px; color:#444; font-size:12px; letter-spacing:1px;">MASTER SERVER CONNECTED ✅</div>
-    <button onclick="changeTab('home')" style="background:none; border:1px solid #333; color:#666; margin-top:30px; padding:10px 20px; border-radius:5px; cursor:pointer;">EXIT MOD</button>
+    <button onclick="changeTab('home')" style="background:none; border:1px solid #333; color:#666; margin-top:30px; padding:10px 20px; border-radius:5px;">EXIT MOD</button>
 </div>
 
 <div class="footer">
     <div class="nav-item nav-active" id="nav-home" onclick="changeTab('home')">HACK MOD</div>
-    <div class="nav-item" id="nav-recharge" onclick="changeTab('recharge')">RECHARGE</div>
 </div>
 
 <script>
-    const firebaseConfig = { databaseURL: "https://jalwamodpanel-default-rtdb.firebaseio.com/" };
+    // Link to Admin's Firebase
+    const firebaseConfig = { databaseURL: "https://jalwa-v2-ad222-default-rtdb.firebaseio.com/" };
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     const myDevice = "JALWA-7226";
-    let isUnlocked = false;
-
-    // Calculator Logic
-    function calc() {
-        let amt = document.getElementById('invest').value;
-        if(amt) {
-            let profit = Math.floor(amt * 4.5); // VIP profit multiplier
-            document.getElementById('profit-val').innerText = "₹" + profit.toLocaleString();
-        }
-    }
+    let isUnlocked = true; // For testing, keep true
 
     function changeTab(name) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active-tab'));
         document.getElementById(name).classList.add('active-tab');
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('nav-active'));
-        if(name !== 'hack') document.getElementById('nav-'+name).classList.add('nav-active');
     }
 
-    // Approval Check
-    db.ref('users/' + myDevice + '/mods').on('value', (snap) => {
-        if(snap.val() && snap.val().colour === true) {
-            isUnlocked = true;
-            document.getElementById('mod-status').innerText = "STATUS: ACTIVE ✅";
-            document.getElementById('mod-status').style.color = "var(--green)";
-            document.getElementById('lock-icon').innerText = "✅";
-            document.getElementById('hint-text').innerText = "SERVER CONNECTED - TAP TO START";
-            document.getElementById('hint-text').style.color = "var(--green)";
+    function openMod() { changeTab('hack'); }
+
+    // --- LINKED SIGNAL LOGIC ---
+    db.ref('nextResult').on('value', (snap) => {
+        const res = snap.val();
+        const g = document.getElementById('ball-g');
+        const v = document.getElementById('ball-v');
+        const r = document.getElementById('ball-r');
+        g.className = v.className = r.className = 'ball';
+
+        if(res !== null) {
+            let color = String(res).toLowerCase();
+            // Handle Numbers 
+            if(['1','3','7','9'].includes(color)) color = 'green';
+            if(['2','4','6','8'].includes(color)) color = 'red';
+            if(['0','5'].includes(color)) color = 'violet';
+
+            if(color === 'green') g.classList.add('active-g');
+            if(color === 'violet') v.classList.add('active-v');
+            if(color === 'red') r.classList.add('active-r');
         }
     });
 
-    function openMod() {
-        if(isUnlocked) changeTab('hack');
-        else changeTab('recharge');
-    }
-
-    function payNow(plan, price) {
-        let utr = prompt("VIP Plan: "+plan+"\nPay Amount: ₹"+price+"\nUPI ID: deepakdeepaksingh1031@axl\n\nEnter 12-digit UTR No:");
-        if(utr && utr.length >= 12) {
-            db.ref('recharges/' + myDevice).set({ utr: utr, plan: plan, status: 'pending', time: Date.now() });
-            alert("Payment Details Sent! Hack will unlock after verification.");
-        }
-    }
-
-    // Master Signal Logic
-    db.ref('hack_signal').on('value', (snap) => {
-        const data = snap.val();
-        const g = document.getElementById('ball-g');
-        const v = document.getElementById('ball-v');
+    setInterval(() => {
+        const sec = new Date().getSeconds();
+        const rem = 30 - (sec % 30);
+        document.getElementById('timer').innerText = "00:" + (rem < 10 ? "0" + rem : rem);
+    }, 1000);
+</script>
+</body>
+</html>
+entById('ball-v');
         const r = document.getElementById('ball-r');
         g.className = v.className = r.className = 'ball';
 
